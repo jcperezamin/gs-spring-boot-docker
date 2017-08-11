@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="gelf" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
+        <host>udp:fluentd</host>
+        <port>12201</port>
+        <version>1.1</version>
+        <extractStackTrace>true</extractStackTrace>
+        <filterStackTrace>false</filterStackTrace>
+        <mdcProfiling>false</mdcProfiling>
+        <timestampPattern>yyyy-MM-dd HH:mm:ss,SSS</timestampPattern>
+        <maximumMessageSize>8192</maximumMessageSize>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="gelf" />
+    </root>
+</configuration>
