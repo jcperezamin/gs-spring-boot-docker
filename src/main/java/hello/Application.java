@@ -11,7 +11,7 @@ public class Application {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello Docker World Vorwerk";
+        return "Our products have been impressing millions of families for more than 130 years, thanks to their superior, innovative technology and legendary long life.";
     }
 
     public static void main(String[] args) {
