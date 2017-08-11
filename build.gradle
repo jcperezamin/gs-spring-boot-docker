@@ -48,5 +48,9 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile('biz.paluch.logging:logstash-gelf:1.11.0')
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+	compile('org.springframework.boot:spring-boot-actuator')
+	compile('com.timgroup:java-statsd-client')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
