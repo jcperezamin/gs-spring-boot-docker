@@ -11,7 +11,7 @@ public class Application {
 
     @RequestMapping("/")
     public String home() {
-        return "Our products have been impressing millions of families for more than 140 years, thanks to their superior, innovative technology and legendary long life.";
+        return "Our products have been impressing millions of families for more than 1400 years, thanks to their superior, innovative technology and legendary long life.";
     }
 
     public static void main(String[] args) {
