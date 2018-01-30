@@ -1,34 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <!-- Comment next line to disable stdout logging -->
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
+        <graylogHost>fluentdamqp</graylogHost>
+        <graylogPort>12201</graylogPort>
+        <maxChunkSize>508</maxChunkSize>
+        <useCompression>true</useCompression>
+        <layout class="de.siegmar.logbackgelf.GelfLayout">
+            <originHost>localhost</originHost>
+            <includeRawMessage>false</includeRawMessage>
+            <includeMarker>true</includeMarker>
+            <includeMdcData>true</includeMdcData>
+            <includeCallerData>false</includeCallerData>
+            <includeRootCauseData>false</includeRootCauseData>
+            <includeLevelName>false</includeLevelName>
+            <shortPatternLayout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%m%nopex</pattern>
+            </shortPatternLayout>
+            <fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%m</pattern>
+            </fullPatternLayout>
+            <staticField>app_name:backend</staticField>
+            <staticField>os_arch:${os.arch}</staticField>
+            <staticField>os_name:${os.name}</staticField>
+            <staticField>os_version:${os.version}</staticField>
+        </layout>
+    </appender>
 
-	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
-
-    <springProfile name="monitoring">
-	    <appender name="GELF" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
-	        <host>udp:fluentdamqp</host>
-	        <port>12201</port>
-	        <version>1.1</version>
-	        <extractStackTrace>true</extractStackTrace>
-	        <filterStackTrace>false</filterStackTrace>
-	        <mdcProfiling>false</mdcProfiling>
-	        <includeFullMdc>true</includeFullMdc>
-	        <timestampPattern>yyyy-MM-dd HH:mm:ss,SSS</timestampPattern>
-	        <maximumMessageSize>8192</maximumMessageSize>
-			<additionalFields>application=${springAppName}</additionalFields>
-			<additionalFieldTypes>application=String</additionalFieldTypes>
-	        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-	            <level>DEBUG</level>
-	        </filter>
-	    </appender>
-    </springProfile>
-
-    <root level="INFO">
-		<springProfile name="monitoring">
-			<appender-ref ref="GELF" />
-		</springProfile>
+    <root level="debug">
+        <appender-ref ref="GELF" />
     </root>
 
 </configuration>
