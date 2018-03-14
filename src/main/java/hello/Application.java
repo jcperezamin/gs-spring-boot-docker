@@ -11,7 +11,7 @@ public class Application {
 
     @RequestMapping("/")
     public String home() {
-        return "Demo Microservicios con 3 zonas de disponibilidad";
+        return "Universidad de Cartagena";
     }
 
     public static void main(String[] args) {
