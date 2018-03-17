@@ -11,7 +11,7 @@ public class Application {
 
     @RequestMapping("/")
     public String home() {
-        return "Universidad de Cartagena";
+        return "Tecnar";
     }
 
     public static void main(String[] args) {
